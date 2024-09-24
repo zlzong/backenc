@@ -38,8 +38,9 @@ mkdir -p "$DECRYPTED_DIR"
 # 遍历加密目录下的所有文件并进行解密
 for encrypted_file in "$ENCRYPTED_DIR"/*.zenc; do
   if [ -f "$encrypted_file" ]; then
+    filename=$(basename "$encrypted_file")
     # 获取解密后的文件名
-    decrypted_filename=$(basename "$encrypted_file" .zenc)
+    decrypted_filename="${filename%_*}"
     decrypted_filepath="$DECRYPTED_DIR/$decrypted_filename"
 
     # 执行解密操作
