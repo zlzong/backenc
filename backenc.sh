@@ -51,14 +51,16 @@ CREATE TABLE IF NOT EXISTS file_write_progress (
 EOF
 }
 
+timestamp=$(date +"%Y%m%d%H%M%S")
+
 # 使用 AES-256 加密文件
 encrypt_file() {
   local filepath="$1"
   local filename=$(basename "$filepath")
-  local dest_filepath="$DEST_DIR/$filename.zenc"
+  local dest_filepath="$DEST_DIR/${filename}_$timestamp.zenc"
 
   # 使用 openssl 进行 AES-256-CBC 加密
-  openssl enc -aes-256-cbc -salt -in "$filepath" -out "$dest_filepath" -pass pass:"$KEY"
+  openssl enc -aes-256-cbc -salt -in "$filepath" -out "$dest_filepath" -pass pass:"$KEY" -pbkdf2
 
   if [ $? -eq 0 ]; then
     echo "Encrypted file saved to: $dest_filepath"
