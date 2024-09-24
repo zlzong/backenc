@@ -10,7 +10,7 @@ show_help() {
   echo "Usage: $0 -e ENCRYPTED_DIR -d DECRYPTED_DIR -k KEY"
   echo ""
   echo "Options:"
-  echo "  -e    Directory containing encrypted files (.enc)."
+  echo "  -e    Directory containing encrypted files (.zenc)."
   echo "  -d    Directory to store decrypted files."
   echo "  -k    AES-256 decryption key (32 bytes)."
   exit 1
@@ -36,7 +36,7 @@ fi
 mkdir -p "$DECRYPTED_DIR"
 
 # 遍历加密目录下的所有文件并进行解密
-for encrypted_file in "$ENCRYPTED_DIR"/*.enc; do
+for encrypted_file in "$ENCRYPTED_DIR"/*.zenc; do
   if [ -f "$encrypted_file" ]; then
     # 获取解密后的文件名
     decrypted_filename=$(basename "$encrypted_file" .zenc)
