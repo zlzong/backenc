@@ -12,3 +12,4 @@ backdec.sh -e /包含加密文件的文件夹 -d /恢复之后文件存放位置
 sudo apt install openssl
 sudo apt install sqlite3
 ```
+可以配合crontab实现定时备份
